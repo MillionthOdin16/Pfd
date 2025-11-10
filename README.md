@@ -35,6 +35,14 @@ This project enhances the user experience of Plastic Fantastic Deals, a website 
 - **Flexible Sorting**: Sort deals by newest, oldest, or alphabetically
 - **Pagination**: Load more deals on demand
 - **Responsive Grid/List Views**: Toggle between card grid and detailed list layouts
+- **Amazon Product Feeds**: Quick access to specialized Amazon product feeds including:
+  - Filament Feed (PLA, PETG, ABS & more)
+  - 3D Printer Feed (FDM & Resin printers)
+  - Resin Feed (3D printer resin deals)
+  - Today's Deals (Amazon daily specials)
+  - HAUL Deals ($1 deals & bargains)
+- **Pagination**: Load more deals on demand
+- **Responsive Grid/List Views**: Toggle between card grid and detailed list layouts
 
 ### User Experience Enhancements
 - **Visual Design**: Modern card-based layout with hover effects and smooth animations
