@@ -41,8 +41,14 @@ This project enhances the user experience of Plastic Fantastic Deals, a website 
   - Resin Feed (3D printer resin deals)
   - Today's Deals (Amazon daily specials)
   - HAUL Deals ($1 deals & bargains)
-- **Pagination**: Load more deals on demand
-- **Responsive Grid/List Views**: Toggle between card grid and detailed list layouts
+
+### Enhanced Pricing Display
+- **Discount Badges**: Prominent display of discount percentages on deal cards
+- **Original Price**: Shows regular price with strikethrough for comparison
+- **Current Price**: Highlighted sale price in large, bold text
+- **Discount Percentage**: Repeated in pricing section for emphasis
+- **Price Per Kilogram**: Automatically displayed for filament and resin products (when applicable)
+- **Visual Pricing Section**: Color-coded pricing area with gradient background for easy scanning
 
 ### User Experience Enhancements
 - **Visual Design**: Modern card-based layout with hover effects and smooth animations

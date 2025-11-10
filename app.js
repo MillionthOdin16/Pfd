@@ -56,9 +56,27 @@ function formatDate(dateString) {
 }
 
 function extractPrice(content) {
-    // Try to extract price from content
-    const priceMatch = content.match(/\$[\d,]+\.?\d{0,2}/);
-    return priceMatch ? priceMatch[0] : null;
+    // Try to extract current price from content
+    const priceMatch = content.match(/cegg-price[^>]*>\s*\$?([\d,]+\.?\d{0,2})/);
+    return priceMatch ? `$${priceMatch[1]}` : null;
+}
+
+function extractOldPrice(content) {
+    // Try to extract old/original price from content
+    const oldPriceMatch = content.match(/cegg-old-price[^>]*>\s*\$?([\d,]+\.?\d{0,2})/);
+    return oldPriceMatch ? `$${oldPriceMatch[1]}` : null;
+}
+
+function extractDiscountPercent(content) {
+    // Try to extract discount percentage
+    const discountMatch = content.match(/grid_onsale[^>]*>[-]?(\d+)%/);
+    return discountMatch ? `${discountMatch[1]}%` : null;
+}
+
+function extractPricePerKg(content) {
+    // Try to extract price per kilogram for filaments
+    const pricePerKgMatch = content.match(/(\$[\d,]+\.?\d{0,2})\s*(?:\/|per)\s*kg/i);
+    return pricePerKgMatch ? pricePerKgMatch[1] + '/kg' : null;
 }
 
 function extractImageUrl(content) {
@@ -88,7 +106,7 @@ const MOCK_DATA = {
         {
             id: 1,
             title: { rendered: "ANYCUBIC Kobra 3 Combo - High Speed 3D Printer" },
-            content: { rendered: '<div class="price">$299.99</div><a href="https://example.com/deal1">Buy Now</a><img src="https://via.placeholder.com/400x300?text=3D+Printer" />' },
+            content: { rendered: '<span class="grid_onsale">-15%</span><div class="cegg-price">$299.99</div><del class="cegg-old-price">$349.99</del><a href="https://example.com/deal1">Buy Now</a><img src="https://via.placeholder.com/400x300?text=3D+Printer" />' },
             excerpt: { rendered: "High-speed FDM 3D printer with auto-leveling and dual extruders. Perfect for beginners and professionals." },
             date: "2025-11-10T10:30:00",
             link: "https://plasticfantasticdeals.com/deal1",
@@ -101,7 +119,7 @@ const MOCK_DATA = {
         {
             id: 2,
             title: { rendered: "ELEGOO Mars 4 Ultra - 9K Resin Printer" },
-            content: { rendered: '<div class="price">$349.99</div><a href="https://example.com/deal2">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Resin+Printer" />' },
+            content: { rendered: '<span class="grid_onsale">-25%</span><div class="cegg-price">$349.99</div><del class="cegg-old-price">$466.65</del><a href="https://example.com/deal2">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Resin+Printer" />' },
             excerpt: { rendered: "Ultra-high resolution 9K mono LCD resin 3D printer with lightning-fast printing speeds." },
             date: "2025-11-09T15:20:00",
             link: "https://plasticfantasticdeals.com/deal2",
@@ -113,9 +131,9 @@ const MOCK_DATA = {
         },
         {
             id: 3,
-            title: { rendered: "PLA Filament Bundle - 10 Colors" },
-            content: { rendered: '<div class="price">$89.99</div><a href="https://example.com/deal3">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Filament" />' },
-            excerpt: { rendered: "Premium PLA filament bundle with 10 vibrant colors, 1kg each spool. Perfect for hobbyists." },
+            title: { rendered: "PLA Filament Bundle - 10 Colors (10kg total)" },
+            content: { rendered: '<span class="grid_onsale">-30%</span><div class="cegg-price">$89.99</div><del class="cegg-old-price">$128.56</del><div class="price-detail">$8.99/kg</div><a href="https://example.com/deal3">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Filament" />' },
+            excerpt: { rendered: "Premium PLA filament bundle with 10 vibrant colors, 1kg each spool. Perfect for hobbyists. Price per kg: $8.99" },
             date: "2025-11-09T09:45:00",
             link: "https://plasticfantasticdeals.com/deal3",
             categories: [94],
@@ -127,7 +145,7 @@ const MOCK_DATA = {
         {
             id: 4,
             title: { rendered: "Creality Ender 3 V3 SE - Budget Friendly" },
-            content: { rendered: '<div class="price">$199.99</div><a href="https://example.com/deal4">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Ender+3" />' },
+            content: { rendered: '<span class="grid_onsale">-20%</span><div class="cegg-price">$199.99</div><del class="cegg-old-price">$249.99</del><a href="https://example.com/deal4">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Ender+3" />' },
             excerpt: { rendered: "Affordable and reliable FDM printer with auto-leveling. Great for beginners on a budget." },
             date: "2025-11-08T14:15:00",
             link: "https://plasticfantasticdeals.com/deal4",
@@ -140,8 +158,8 @@ const MOCK_DATA = {
         {
             id: 5,
             title: { rendered: "SUNLU Water Washable Resin - 2kg" },
-            content: { rendered: '<div class="price">$45.99</div><a href="https://example.com/deal5">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Resin" />' },
-            excerpt: { rendered: "Easy-to-use water washable resin in multiple colors. No isopropyl alcohol needed!" },
+            content: { rendered: '<span class="grid_onsale">-10%</span><div class="cegg-price">$45.99</div><del class="cegg-old-price">$50.99</del><div class="price-detail">$22.99/kg</div><a href="https://example.com/deal5">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Resin" />' },
+            excerpt: { rendered: "Easy-to-use water washable resin in multiple colors. No isopropyl alcohol needed! Price per kg: $22.99" },
             date: "2025-11-08T11:30:00",
             link: "https://plasticfantasticdeals.com/deal5",
             categories: [95],
@@ -153,7 +171,7 @@ const MOCK_DATA = {
         {
             id: 6,
             title: { rendered: "All-Metal Hotend Upgrade Kit" },
-            content: { rendered: '<div class="price">$29.99</div><a href="https://example.com/deal6">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Hotend" />' },
+            content: { rendered: '<span class="grid_onsale">-35%</span><div class="cegg-price">$29.99</div><del class="cegg-old-price">$46.14</del><a href="https://example.com/deal6">Buy Now</a><img src="https://via.placeholder.com/400x300?text=Hotend" />' },
             excerpt: { rendered: "Premium all-metal hotend for high-temp filaments. Compatible with most Creality printers." },
             date: "2025-11-07T16:00:00",
             link: "https://plasticfantasticdeals.com/deal6",
@@ -245,6 +263,9 @@ function renderDealCard(post) {
     const content = post.content?.rendered || '';
     const excerpt = post.excerpt?.rendered || '';
     const price = extractPrice(content);
+    const oldPrice = extractOldPrice(content);
+    const discountPercent = extractDiscountPercent(content);
+    const pricePerKg = extractPricePerKg(content);
     const imageUrl = extractImageUrl(content);
     const storeLink = extractStoreLink(content);
     const cleanExcerpt = stripHtml(excerpt).trim();
@@ -272,6 +293,7 @@ function renderDealCard(post) {
     card.innerHTML = `
         <div class="deal-image-container">
             <img src="${imageUrl}" alt="${post.title?.rendered || 'Deal'}" class="deal-image" loading="lazy">
+            ${discountPercent ? `<span class="deal-discount-badge">${discountPercent} OFF</span>` : ''}
             ${storeName ? `<span class="deal-badge">${storeName}</span>` : ''}
         </div>
         <div class="deal-content">
@@ -282,7 +304,14 @@ function renderDealCard(post) {
                     ${storeName ? `<span class="deal-store">🏪 ${storeName}</span>` : ''}
                 </div>
             </div>
-            ${price ? `<div class="deal-price">${price}</div>` : ''}
+            ${price || oldPrice ? `
+                <div class="deal-pricing">
+                    ${price ? `<div class="deal-price">${price}</div>` : ''}
+                    ${oldPrice ? `<div class="deal-old-price">${oldPrice}</div>` : ''}
+                    ${discountPercent ? `<div class="deal-discount">${discountPercent} OFF</div>` : ''}
+                    ${pricePerKg ? `<div class="deal-price-per-kg">💰 ${pricePerKg}</div>` : ''}
+                </div>
+            ` : ''}
             ${cleanExcerpt ? `<p class="deal-excerpt">${cleanExcerpt}</p>` : ''}
             <div class="deal-footer">
                 <span class="deal-date">📅 ${formatDate(post.date)}</span>
