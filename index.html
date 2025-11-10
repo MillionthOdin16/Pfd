@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plastic Fantastic Deals - Enhanced UI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <h1>🛒 Plastic Fantastic Deals</h1>
+                        <p class="tagline">Hide Your Wallet :)</p>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search deals..." class="search-input">
+                        <button id="searchBtn" class="search-btn">🔍</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation / Filters -->
+        <nav class="filters-bar">
+            <div class="container">
+                <div class="filters-content">
+                    <!-- Category Filter -->
+                    <div class="filter-group">
+                        <label for="categoryFilter">Category:</label>
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                        </select>
+                    </div>
+
+                    <!-- Store Filter -->
+                    <div class="filter-group">
+                        <label for="storeFilter">Store:</label>
+                        <select id="storeFilter" class="filter-select">
+                            <option value="">All Stores</option>
+                        </select>
+                    </div>
+
+                    <!-- Sort By -->
+                    <div class="filter-group">
+                        <label for="sortBy">Sort By:</label>
+                        <select id="sortBy" class="filter-select">
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="title-asc">Title A-Z</option>
+                            <option value="title-desc">Title Z-A</option>
+                        </select>
+                    </div>
+
+                    <!-- View Toggle -->
+                    <div class="filter-group">
+                        <button id="gridViewBtn" class="view-btn active" title="Grid View">⊞</button>
+                        <button id="listViewBtn" class="view-btn" title="List View">☰</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <div class="container">
+                <button class="quick-link-btn" data-category="92">FDM Printers</button>
+                <button class="quick-link-btn" data-category="93">Resin Printers</button>
+                <button class="quick-link-btn" data-category="">Filament</button>
+                <button class="quick-link-btn" data-category="">Resin</button>
+                <button class="quick-link-btn" data-category="">Parts</button>
+            </div>
+        </div>
+
+        <!-- Feed Pages Section -->
+        <div class="feed-pages-section">
+            <div class="container">
+                <h3 class="section-title">📋 Amazon Product Feeds</h3>
+                <div class="feed-pages-grid">
+                    <a href="https://plasticfantasticdeals.com/mainfilamentfeed/" target="_blank" rel="noopener" class="feed-page-card">
+                        <div class="feed-icon">🧵</div>
+                        <h4>Filament Feed</h4>
+                        <p>PLA, PETG, ABS & more</p>
+                    </a>
+                    <a href="https://plasticfantasticdeals.com/main3dprinterfeed/" target="_blank" rel="noopener" class="feed-page-card">
+                        <div class="feed-icon">🖨️</div>
+                        <h4>3D Printer Feed</h4>
+                        <p>FDM & Resin printers</p>
+                    </a>
+                    <a href="https://plasticfantasticdeals.com/mainresinfeed/" target="_blank" rel="noopener" class="feed-page-card">
+                        <div class="feed-icon">💧</div>
+                        <h4>Resin Feed</h4>
+                        <p>3D printer resin deals</p>
+                    </a>
+                    <a href="https://plasticfantasticdeals.com/amztodaysdeals/" target="_blank" rel="noopener" class="feed-page-card">
+                        <div class="feed-icon">⚡</div>
+                        <h4>Today's Deals</h4>
+                        <p>Amazon daily specials</p>
+                    </a>
+                    <a href="https://plasticfantasticdeals.com/haul-deals/" target="_blank" rel="noopener" class="feed-page-card">
+                        <div class="feed-icon">💰</div>
+                        <h4>HAUL Deals</h4>
+                        <p>$1 deals & bargains</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Stats Bar -->
+                <div class="stats-bar">
+                    <span id="resultsCount">Loading deals...</span>
+                    <button id="refreshBtn" class="refresh-btn">🔄 Refresh</button>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loadingState" class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading amazing deals...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="errorState" class="error-state" style="display: none;">
+                    <p>⚠️ Failed to load deals. Please try again.</p>
+                    <button id="retryBtn" class="retry-btn">Retry</button>
+                </div>
+
+                <!-- Deals Grid -->
+                <div id="dealsGrid" class="deals-grid grid-view">
+                    <!-- Deals will be inserted here dynamically -->
+                </div>
+
+                <!-- Load More -->
+                <div class="load-more-container">
+                    <button id="loadMoreBtn" class="load-more-btn" style="display: none;">Load More Deals</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 Plastic Fantastic Deals - Enhanced UI</p>
+                <p>Data sourced from <a href="https://plasticfantasticdeals.com" target="_blank">plasticfantasticdeals.com</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
