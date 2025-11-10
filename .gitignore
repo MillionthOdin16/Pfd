@@ -30,6 +30,8 @@ build/
 # Dependencies (if any are added in the future)
 node_modules/
 vendor/
+package-lock.json
+yarn.lock
 
 # Environment files
 .env

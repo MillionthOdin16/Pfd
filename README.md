@@ -1,6 +1,20 @@
 # Plastic Fantastic Deals - Enhanced UI
 
+[![Deploy to GitHub Pages](https://github.com/MillionthOdin16/Pfd/actions/workflows/deploy.yml/badge.svg)](https://github.com/MillionthOdin16/Pfd/actions/workflows/deploy.yml)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/MillionthOdin16/Pfd)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/MillionthOdin16/Pfd)
+
 A modern, responsive single-page application (SPA) that provides an improved user interface for browsing deals from [plasticfantasticdeals.com](https://plasticfantasticdeals.com/).
+
+## 🚀 Quick Deploy
+
+Choose your preferred hosting platform and deploy with one click:
+
+- **GitHub Pages**: Go to Settings → Pages → Select branch → Deploy
+- **Netlify**: Click the "Deploy to Netlify" button above
+- **Vercel**: Click the "Deploy with Vercel" button above
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 
 ## 🎯 Purpose
 
